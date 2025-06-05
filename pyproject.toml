@@ -1,0 +1,57 @@
+# See: https://packaging.python.org/en/latest/tutorials/packaging-projects/
+# See: https://packaging.python.org/en/latest/guides/writing-pyproject-toml/
+
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[project]
+name = "apache-airflow-providers-asimov"
+description = "Provider package apache-airflow-providers-asimov for Apache Airflow"
+readme = "README.md"
+license = "Unlicense"
+license-files = ["UNLICENSE"]
+authors = [{ name = "ASIMOV Protocol", email = "support@asimov.so" }]
+requires-python = ">=3.9"
+dependencies = ["apache-airflow>=3"]
+dynamic = ["version"]
+
+[project.urls]
+Homepage = "https://github.com/asimov-platform"
+Repository = "https://github.com/asimov-platform/apache-airflow-providers-asimov"
+Changelog = "https://github.com/asimov-platform/apache-airflow-providers-asimov/blob/master/CHANGES.md"
+Releases = "https://github.com/asimov-platform/apache-airflow-providers-asimov/releases"
+Issues = "https://github.com/asimov-platform/apache-airflow-providers-asimov/issues"
+
+[dependency-groups]
+dev = []
+docs = [
+    "mkdocs>=1.6",
+    "mkdocs-git-committers-plugin-2>=2.5",
+    "mkdocs-git-revision-date-localized-plugin>=1.2",
+    "mkdocs-llmstxt>=0.2",
+    "mkdocs-material[imaging]>=9.5",
+    "mkdocstrings[python]>=0.29",
+]
+lint = ["ruff"]
+test = ["pytest"]
+
+[tool.hatch.version]
+source = "vcs"
+fallback-version = "0.0.0"
+
+[tool.hatch.build.hooks.vcs]
+version-file = "airflow/providers/asimov/_version.py"
+
+[tool.hatch.build.targets.sdist]
+only-include = ["AUTHORS", "CHANGES.md", "Makefile", "VERSION", "airflow"]
+exclude = [".*"]
+
+[tool.hatch.envs.default]
+installer = "uv"
+
+[tool.mypy]
+disallow_untyped_defs = true
+
+[tool.uv]
+default-groups = ["dev", "docs"]
