@@ -35,7 +35,6 @@ jobs:
           python-version: ${{ matrix.python-version }}
           enable-cache: true
       - run: uv sync --frozen --group lint --group test
-      - run: uv add apache-airflow>=3 --group test
       - run: uv run pytest -q
 
   build-dev:
