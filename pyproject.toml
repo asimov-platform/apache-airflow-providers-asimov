@@ -55,3 +55,6 @@ disallow_untyped_defs = true
 
 [tool.uv]
 default-groups = ["dev", "docs"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
